@@ -63,9 +63,11 @@ Before using this MCP server, you'll need to set up Google Search Console API cr
 2. Download the JSON key file
 3. Grant the service account access to your GSC properties
 
-[![How to Get Google Search Console API Credentials & Add a Service Account](https://img.youtube.com/vi/UeEuJAD0ZsU/0.jpg)](https://www.youtube.com/watch?v=UeEuJAD0ZsU "How to Get Google Search Console API Credentials & Add a Service Account (Step-by-Step)")
+<a href="https://www.youtube.com/watch?v=UeEuJAD0ZsU" target="_blank">
+  <img src="https://img.youtube.com/vi/UeEuJAD0ZsU/0.jpg" alt="How to Get Google Search Console API Credentials & Add a Service Account" width="600">
+</a>
 
-*Click the image above to watch the step-by-step video tutorial*
+*Click the image above to watch the step-by-step video tutorial (opens in new tab)*
 
 ### 2. Python Requirements
 
