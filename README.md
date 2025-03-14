@@ -15,16 +15,19 @@ A tool that connects [Google Search Console](https://search.google.com/search-co
    - Track impressions, clicks, and click-through rates
    - Analyze performance trends over time
    - Compare different time periods to spot changes
+   - **Visualize your data** with charts and graphs created by Claude
 
 3. **URL Inspection & Indexing**  
    - Check if specific pages have indexing problems
    - See when Google last crawled your pages
    - Inspect multiple URLs at once to identify patterns
+   - Get actionable insights on how to improve indexing
 
 4. **Sitemap Management**  
    - View all your sitemaps and their status
    - Submit new sitemaps directly through Claude
    - Check for errors or warnings in your sitemaps
+   - Monitor sitemap processing status
 
 ---
 
@@ -157,14 +160,49 @@ Open your computer's Terminal (Mac) or Command Prompt (Windows):
 
 ### 6. Start Analyzing Your SEO Data!
 
-Now you can ask Claude questions about your GSC data like:
+Now you can ask Claude questions about your GSC data! Claude can not only retrieve the data but also analyze it, explain trends, and create visualizations to help you understand your SEO performance better.
 
-- "Show me the top search queries for my site in the last 30 days"
-- "Check if these URLs have any indexing issues"
-- "What's my site's overall performance trend?"
-- "List all the sitemaps for my property"
+Here are some example prompts you can use with each tool:
 
-Claude will use the GSC tools to fetch the data and present it to you in an easy-to-understand format.
+| **Tool Name**                   | **Sample Prompt**                                                                                | **What You'll Learn**                                           |
+|---------------------------------|--------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
+| `list_properties`               | "Show me all my GSC properties."                                                                 | All websites you have access to in GSC                          |
+| `get_site_details`              | "Get details for my site example.com."                                                           | Verification status, ownership details, and site information     |
+| `get_search_analytics`          | "What are the top 10 search queries for example.com in the last 30 days?"                        | Your most valuable search terms with clicks, impressions, CTR    |
+| `get_performance_overview`      | "Give me a performance overview of example.com for the last 14 days and visualize the trends."   | Summary of site performance with visual charts                   |
+| `check_indexing_issues`         | "Check if these pages have indexing issues: example.com/page1, example.com/page2"                | Indexing status and potential problems with specific URLs        |
+| `inspect_url_enhanced`          | "Do a detailed inspection of example.com/important-page and explain any issues."                 | Comprehensive analysis of a specific URL's indexing status       |
+| `batch_url_inspection`          | "Inspect these 5 URLs and summarize any common issues: example.com/page1, example.com/page2..." | Patterns of indexing issues across multiple pages                |
+| `get_sitemaps`                  | "List all sitemaps for example.com and their status."                                            | All submitted sitemaps and their processing status               |
+| `list_sitemaps_enhanced`        | "Show me detailed information about all sitemaps for example.com."                               | In-depth sitemap analysis including errors and warnings          |
+| `submit_sitemap`                | "Submit this new sitemap: https://example.com/new-sitemap.xml"                                   | Confirmation of sitemap submission                              |
+| `get_sitemap_details`           | "What's the status of my sitemap at example.com/sitemap.xml?"                                    | Detailed processing status of a specific sitemap                 |
+| `get_search_by_page_query`      | "What queries are bringing traffic to example.com/specific-page?"                                | Search terms driving traffic to a specific page                  |
+| `compare_search_periods`        | "Compare search performance between last month and this month for example.com."                  | Period-over-period analysis with key changes highlighted         |
+| `get_advanced_search_analytics` | "Show me mobile search performance for example.com, focusing on position 1-3 queries."           | Filtered analytics based on device, position, country, etc.      |
+
+You can also ask Claude to combine multiple tools and analyze the results. For example:
+
+- "Check the indexing status of my top 10 landing pages and suggest improvements."
+- "Analyze my site's performance trend over the last 90 days and identify any significant changes."
+- "Compare desktop vs. mobile search performance and visualize the differences."
+- "Find queries where I'm ranking on page 2 (positions 11-20) that have high impressions but low CTR."
+
+Claude will use the GSC tools to fetch the data, present it in an easy-to-understand format, create visualizations when helpful, and provide actionable insights based on the results.
+
+---
+
+## Data Visualization Capabilities
+
+Claude can help you visualize your GSC data in various ways:
+
+- **Trend Charts**: See how metrics change over time
+- **Comparison Graphs**: Compare different time periods or dimensions
+- **Performance Distributions**: Understand how your content performs across positions
+- **Correlation Analysis**: Identify relationships between different metrics
+- **Heatmaps**: Visualize complex datasets with color-coded representations
+
+Simply ask Claude to "visualize" or "create a chart" when analyzing your data, and it will generate appropriate visualizations to help you understand the information better.
 
 ---
 
