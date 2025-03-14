@@ -71,18 +71,41 @@ You'll need two things installed on your computer:
 - [Python](https://www.python.org/downloads/) (version 3.11 or newer) - This runs the connection between GSC and Claude
 - [Claude Desktop](https://claude.ai/desktop) - The AI assistant you'll chat with
 
-After installing Python, you'll need to install some additional components. Open your computer's Terminal or Command Prompt and type:
+### 3. Download the GSC Tool
+
+You need to download this tool to your computer. The easiest way is:
+
+1. Click the green "Code" button at the top of this page
+2. Select "Download ZIP"
+3. Unzip the downloaded file to a location you can easily find (like your Documents folder)
+
+Alternatively, if you're familiar with Git:
 
 ```bash
-# If you're comfortable with newer tools:
-pip install uv
-uv install -r requirements.txt
-
-# OR if you prefer the standard approach:
-pip install -r requirements.txt
+git clone https://github.com/AminForou/mcp-gsc.git
 ```
 
-### 3. Connect Claude to Google Search Console
+### 4. Install Required Components
+
+Open your computer's Terminal (Mac) or Command Prompt (Windows):
+
+1. Navigate to the folder where you unzipped the files:
+   ```bash
+   # Example (replace with your actual path):
+   cd ~/Documents/mcp-gsc
+   ```
+
+2. Install the required components:
+   ```bash
+   # If you're comfortable with newer tools:
+   pip install uv
+   uv install -r requirements.txt
+
+   # OR if you prefer the standard approach:
+   pip install -r requirements.txt
+   ```
+
+### 5. Connect Claude to Google Search Console
 
 1. Download and install [Claude Desktop](https://claude.ai/desktop) if you haven't already
 2. Make sure you have your Google service account credentials file saved somewhere on your computer
@@ -103,18 +126,27 @@ pip install -r requirements.txt
      "mcpServers": {
        "gscServer": {
          "command": "python",
-         "args": ["/PATH/TO/YOUR/DOWNLOADED/mcp-gsc/gsc_server.py"],
+         "args": ["/FULL/PATH/TO/mcp-gsc/gsc_server.py"],
          "env": {
-           "GSC_CREDENTIALS_PATH": "/PATH/TO/YOUR/service_account_credentials.json"
+           "GSC_CREDENTIALS_PATH": "/FULL/PATH/TO/service_account_credentials.json"
          }
        }
      }
    }
    ```
 
-   **Important:** Replace both `/PATH/TO/YOUR/...` sections with the actual locations of the files on your computer. For example:
-   - Mac: `/Users/yourname/Downloads/mcp-gsc/gsc_server.py`
-   - Windows: `C:\\Users\\yourname\\Downloads\\mcp-gsc\\gsc_server.py`
+   **Important:** Replace both paths with the actual locations of the files on your computer:
+   
+   - The first path should point to the `gsc_server.py` file inside the folder you unzipped
+   - The second path should point to your Google service account credentials JSON file
+   
+   Examples:
+   - Mac: `/Users/yourname/Documents/mcp-gsc/gsc_server.py`
+   - Windows: `C:\\Users\\yourname\\Documents\\mcp-gsc\\gsc_server.py`
+
+   **Pro Tip:** To get the full path of a file:
+   - Mac: Right-click the file, hold Option key, and select "Copy as Pathname"
+   - Windows: Shift+Right-click the file and select "Copy as path"
 
 5. Save the file:
    - Mac: Press Ctrl+O, then Enter, then Ctrl+X to exit
@@ -123,7 +155,7 @@ pip install -r requirements.txt
 6. Restart Claude Desktop
 7. When Claude opens, you should now see GSC tools available in the tools section
 
-### 4. Start Analyzing Your SEO Data!
+### 6. Start Analyzing Your SEO Data!
 
 Now you can ask Claude questions about your GSC data like:
 
