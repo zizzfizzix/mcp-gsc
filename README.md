@@ -1,6 +1,6 @@
 # Google Search Console MCP
 
-An MCP server implementation that integrates [Google Search Console](https://search.google.com/search-console/about) (GSC). This server exposes read-only GSC data and tools for property management, sitemaps, site details, indexing inspections, and more.
+An MCP server implementation that integrates [Google Search Console](https://search.google.com/search-console/about) (GSC) with Claude AI. This server exposes read-only GSC data and tools for property management, sitemaps, site details, indexing inspections, and more.
 
 ---
 
@@ -8,7 +8,7 @@ An MCP server implementation that integrates [Google Search Console](https://sea
 
 1. **Property Management**  
    - `list_properties`: Enumerate your GSC properties.  
-   - `get_site_details`: Inspect a GSC property’s basic data and verification info.
+   - `get_site_details`: Inspect a GSC property's basic data and verification info.
 
 2. **Analytics & Reporting**  
    - `get_search_analytics`: Retrieve aggregated search performance metrics (queries, impressions, CTR, etc.).  
@@ -56,19 +56,17 @@ Below is a short summary of each tool exposed by MCP-GSC. For full usage instruc
 
 ---
 
-## Configuration
+## Getting Started
 
-### 1. Credentials Setup
+### 1. Google Search Console API Credentials
 
-This server requires a **service account JSON** (or user OAuth credentials). Typically:
+Before using this MCP server, you'll need to set up Google Search Console API credentials:
 
-1. Create a service account in your Google Cloud Console.  
-2. Download the **JSON key** (e.g., `service_account_credentials.json`).  
-3. Either place it alongside `gsc_server.py` **or** set an environment variable:
-   ```bash
-   export GSC_CREDENTIALS_PATH="/absolute/path/to/service_account_credentials.json"
-   ```
-4. Make sure your service account has been granted access to relevant GSC properties.
+1. Create a service account in Google Cloud Console
+2. Download the JSON key file
+3. Grant the service account access to your GSC properties
+
+[Watch this step-by-step video tutorial on setting up GSC API credentials](https://www.youtube.com/watch?v=YOUR_VIDEO_ID_HERE)
 
 ### 2. Python Requirements
 
@@ -96,7 +94,9 @@ uv run gsc_server.py
 
 ---
 
-## Usage with Claude Desktop
+## Integration with Claude
+
+### Claude Desktop Configuration
 
 To integrate this server with Claude Desktop:
 
