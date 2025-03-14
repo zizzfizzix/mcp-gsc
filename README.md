@@ -1,133 +1,158 @@
 # Google Search Console MCP
 
-An MCP server implementation that integrates [Google Search Console](https://search.google.com/search-console/about) (GSC) with Claude AI. This server exposes read-only GSC data and tools for property management, sitemaps, site details, indexing inspections, and more.
+A tool that connects [Google Search Console](https://search.google.com/search-console/about) (GSC) with Claude AI, allowing you to analyze your SEO data through natural language conversations. This integration gives you access to property information, search analytics, URL inspection, and sitemap management—all through simple chat with Claude.
 
 ---
 
-## Features
+## What Can This Tool Do For SEO Professionals?
 
 1. **Property Management**  
-   - `list_properties`: Enumerate your GSC properties.  
-   - `get_site_details`: Inspect a GSC property's basic data and verification info.
+   - See all your GSC properties in one place
+   - Get verification details and basic site information
 
-2. **Analytics & Reporting**  
-   - `get_search_analytics`: Retrieve aggregated search performance metrics (queries, impressions, CTR, etc.).  
-   - `get_performance_overview`: Summarized performance and daily trends.  
-   - `get_advanced_search_analytics`: Advanced filters, sorting, and pagination for deeper insights.  
+2. **Search Analytics & Reporting**  
+   - Discover which search queries bring visitors to your site
+   - Track impressions, clicks, and click-through rates
+   - Analyze performance trends over time
+   - Compare different time periods to spot changes
 
-3. **Indexing & URL Inspection**  
-   - `check_indexing_issues`: Evaluate potential indexing or canonical issues across multiple URLs.  
-   - `inspect_url_enhanced`: Detailed URL inspection (indexing coverage, last crawl, etc.).  
-   - `batch_url_inspection`: Inspect multiple URLs in one operation.
+3. **URL Inspection & Indexing**  
+   - Check if specific pages have indexing problems
+   - See when Google last crawled your pages
+   - Inspect multiple URLs at once to identify patterns
 
 4. **Sitemap Management**  
-   - `manage_sitemaps`: All-in-one approach to list, get details, submit, or delete sitemaps.  
-   - `get_sitemaps`: Quick listing of sitemaps for a property.  
-   - `list_sitemaps_enhanced`: More in-depth listing (index vs. child sitemaps, error/warning details).
+   - View all your sitemaps and their status
+   - Submit new sitemaps directly through Claude
+   - Check for errors or warnings in your sitemaps
 
 ---
 
-## Tools
+## Available Tools
 
-Below is a short summary of each tool exposed by MCP-GSC. For full usage instructions, call `list_tools` in your MCP client or see the docstrings in [gsc_server.py](gsc_server.py).
+Here's what you can ask Claude to do once you've set up this integration:
 
-| **Tool Name**                   | **Purpose**                                                   | **Key Parameters**                                                 |
-|---------------------------------|---------------------------------------------------------------|---------------------------------------------------------------------|
-| `list_properties`               | List your GSC properties.                                    | *(none)*                                                            |
-| `get_site_details`              | Get property-level details and verification info.            | `site_url`                                                          |
-| `get_search_analytics`          | Fetch top queries/pages plus metrics in a given date window. | `site_url`, `days`, `dimensions`                                    |
-| `get_performance_overview`      | Summarized performance and daily trend.                      | `site_url`, `days`                                                 |
-| `check_indexing_issues`         | Diagnose indexing issues across multiple URLs.               | `site_url`, `urls (newline-separated)`                              |
-| `inspect_url_enhanced`          | Enhanced URL inspection (coverage state, last crawl, etc.).  | `site_url`, `page_url`                                              |
-| `batch_url_inspection`          | Inspect multiple URLs (limit 10).                            | `site_url`, `urls (newline-separated)`                              |
-| `get_sitemaps`                  | List sitemaps for a property.                                | `site_url`                                                          |
-| `list_sitemaps_enhanced`        | Advanced listing for sitemap index vs. child sitemaps.       | `site_url`, `sitemap_index` (optional)                              |
-| `manage_sitemaps`               | All-in-one submit/delete/list sitemaps.                      | `site_url`, `action`, `sitemap_url` (varies by action)              |
-| `get_sitemap_details`           | Detailed info about a specific sitemap.                      | `site_url`, `sitemap_url`                                           |
-| `submit_sitemap`                | Submit (or re-submit) a sitemap to GSC.                      | `site_url`, `sitemap_url`                                           |
-| `delete_sitemap`                | Remove (unsubmit) a sitemap from GSC.                        | `site_url`, `sitemap_url`                                           |
-| `get_search_by_page_query`      | Queries and metrics for a specific page.                     | `site_url`, `page_url`, `days`                                      |
-| `get_advanced_search_analytics` | Advanced analytics filtering, sorting, pagination, etc.      | `site_url`, `start_date`, `end_date`, `dimensions`, … (see doc)     |
-| `compare_search_periods`        | Compare search analytics data between two date ranges.       | `site_url`, `period1_start`, `period1_end`, `period2_start`, …      |
-| `get_creator_info`              | Info about Amin Foroutan, creator of the MCP-GSC tool.       | *(none)*                                                            |
+| **What You Can Ask For**        | **What It Does**                                            | **What You'll Need to Provide**                                 |
+|---------------------------------|-------------------------------------------------------------|----------------------------------------------------------------|
+| `list_properties`               | Shows all your GSC properties                               | Nothing - just ask!                                             |
+| `get_site_details`              | Shows details about a specific site                         | Your website URL                                                |
+| `get_search_analytics`          | Shows top queries and pages with metrics                    | Your website URL and time period                                |
+| `get_performance_overview`      | Gives a summary of site performance                         | Your website URL and time period                                |
+| `check_indexing_issues`         | Checks if pages have indexing problems                      | Your website URL and list of pages to check                     |
+| `inspect_url_enhanced`          | Detailed inspection of a specific URL                       | Your website URL and the page to inspect                        |
+| `get_sitemaps`                  | Lists all sitemaps for your site                            | Your website URL                                                |
+| `submit_sitemap`                | Submits a new sitemap to Google                             | Your website URL and sitemap URL                                |
+
+*For a complete list of all 17 available tools and their detailed descriptions, ask Claude to "list tools" after setup.*
 
 ---
 
-## Getting Started
+## Getting Started (No Coding Experience Required!)
 
-### 1. Google Search Console API Credentials
+### 1. Set Up Google Search Console API Access
 
-Before using this MCP server, you'll need to set up Google Search Console API credentials:
+Before using this tool, you'll need to create API credentials that allow Claude to access your GSC data:
 
-1. Create a service account in Google Cloud Console
-2. Download the JSON key file
-3. Grant the service account access to your GSC properties
+1. Create a Google Cloud account if you don't have one
+2. Set up a service account (like a special user for API access)
+3. Download the credentials file (a JSON file)
+4. Grant this service account access to your GSC properties
 
-<a href="https://www.youtube.com/watch?v=UeEuJAD0ZsU" target="_blank">
-  <img src="https://img.youtube.com/vi/UeEuJAD0ZsU/0.jpg" alt="How to Get Google Search Console API Credentials & Add a Service Account" width="600">
-</a>
+**Watch this beginner-friendly tutorial:**
 
-*Click the image above to watch the step-by-step video tutorial (opens in new tab)*
+[![How to Get Google Search Console API Credentials & Add a Service Account](https://img.youtube.com/vi/UeEuJAD0ZsU/0.jpg)](https://www.youtube.com/watch?v=UeEuJAD0ZsU)
 
-### 2. Python Requirements
+*Click the image above to watch the step-by-step video tutorial (right-click and select "Open link in new tab" to keep this page open)*
 
-- Python 3.11 or higher
-- Install dependencies:
+### 2. Install Required Software
+
+You'll need two things installed on your computer:
+
+- [Python](https://www.python.org/downloads/) (version 3.11 or newer) - This runs the connection between GSC and Claude
+- [Claude Desktop](https://claude.ai/desktop) - The AI assistant you'll chat with
+
+After installing Python, you'll need to install some additional components. Open your computer's Terminal or Command Prompt and type:
 
 ```bash
-uv install  # Recommended
+# If you're comfortable with newer tools:
+pip install uv
+uv install -r requirements.txt
 
-# OR using pip
+# OR if you prefer the standard approach:
 pip install -r requirements.txt
 ```
 
-### 3. Running Locally
+### 3. Connect Claude to Google Search Console
 
-```bash
-python mcp-gsc/gsc_server.py
-```
+1. Download and install [Claude Desktop](https://claude.ai/desktop) if you haven't already
+2. Make sure you have your Google service account credentials file saved somewhere on your computer
+3. Open your computer's Terminal (Mac) or Command Prompt (Windows) and type:
 
-Or using [`uv`](https://astral.sh/uv/):
+   ```bash
+   # For Mac users:
+   nano ~/Library/Application\ Support/Claude/claude_desktop_config.json
+   
+   # For Windows users:
+   notepad %APPDATA%\Claude\claude_desktop_config.json
+   ```
 
-```bash
-uv run gsc_server.py
-```
-
----
-
-## Integration with Claude
-
-### Claude Desktop Configuration
-
-To integrate this server with Claude Desktop:
-
-1. Ensure `service_account_credentials.json` is available or use an env variable.
-2. Edit `claude_desktop_config.json` (MacOS: `~/Library/Application Support/Claude`, Windows: `%APPDATA%/Claude`):
+4. Add the following text (this tells Claude how to connect to GSC):
 
    ```json
    {
      "mcpServers": {
        "gscServer": {
          "command": "python",
-         "args": ["/ABSOLUTE/PATH/TO/mcp-gsc/gsc_server.py"],
+         "args": ["/PATH/TO/YOUR/DOWNLOADED/mcp-gsc/gsc_server.py"],
          "env": {
-           "GSC_CREDENTIALS_PATH": "/ABSOLUTE/PATH/TO/service_account_credentials.json"
+           "GSC_CREDENTIALS_PATH": "/PATH/TO/YOUR/service_account_credentials.json"
          }
        }
      }
    }
    ```
 
-3. Restart Claude for Desktop and check the MCP tools.
+   **Important:** Replace both `/PATH/TO/YOUR/...` sections with the actual locations of the files on your computer. For example:
+   - Mac: `/Users/yourname/Downloads/mcp-gsc/gsc_server.py`
+   - Windows: `C:\\Users\\yourname\\Downloads\\mcp-gsc\\gsc_server.py`
+
+5. Save the file:
+   - Mac: Press Ctrl+O, then Enter, then Ctrl+X to exit
+   - Windows: Click File > Save, then close Notepad
+
+6. Restart Claude Desktop
+7. When Claude opens, you should now see GSC tools available in the tools section
+
+### 4. Start Analyzing Your SEO Data!
+
+Now you can ask Claude questions about your GSC data like:
+
+- "Show me the top search queries for my site in the last 30 days"
+- "Check if these URLs have any indexing issues"
+- "What's my site's overall performance trend?"
+- "List all the sitemaps for my property"
+
+Claude will use the GSC tools to fetch the data and present it to you in an easy-to-understand format.
+
+---
+
+## Troubleshooting
+
+If you're having trouble connecting:
+
+1. Make sure all file paths in your configuration are correct and use the full path
+2. Check that your service account has access to your GSC properties
+3. Restart Claude Desktop after making any changes
+4. Look for error messages in Claude's response when you try to use a tool
 
 ---
 
 ## Contributing
 
-PRs are welcome! If you find a bug or want to add a new GSC endpoint, open an issue or submit a pull request.
+Found a bug or have an idea for improvement? We welcome your input! Open an issue or submit a pull request on GitHub.
 
 ---
 
 ## License
 
-This MCP-GSC project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
