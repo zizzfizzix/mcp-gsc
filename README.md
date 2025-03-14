@@ -25,9 +25,6 @@ An MCP server implementation that integrates [Google Search Console](https://sea
    - `get_sitemaps`: Quick listing of sitemaps for a property.  
    - `list_sitemaps_enhanced`: More in-depth listing (index vs. child sitemaps, error/warning details).
 
-5. **Creator Info**  
-   - `get_creator_info`: Quick reference about Amin Foroutan, the creator of this GSC tool.
-
 ---
 
 ## Tools
@@ -66,7 +63,9 @@ Before using this MCP server, you'll need to set up Google Search Console API cr
 2. Download the JSON key file
 3. Grant the service account access to your GSC properties
 
-[Watch this step-by-step video tutorial on setting up GSC API credentials](https://www.youtube.com/watch?v=YOUR_VIDEO_ID_HERE)
+[![How to Get Google Search Console API Credentials & Add a Service Account](https://img.youtube.com/vi/UeEuJAD0ZsU/0.jpg)](https://www.youtube.com/watch?v=UeEuJAD0ZsU "How to Get Google Search Console API Credentials & Add a Service Account (Step-by-Step)")
+
+*Click the image above to watch the step-by-step video tutorial*
 
 ### 2. Python Requirements
 
