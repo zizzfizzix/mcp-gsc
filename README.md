@@ -102,15 +102,34 @@ Open your computer's Terminal (Mac) or Command Prompt (Windows):
    cd ~/Documents/mcp-gsc
    ```
 
-2. Install the required components:
+2. Create a virtual environment (this keeps the project dependencies isolated):
    ```bash
-   # If you're comfortable with newer tools:
-   pip install uv
-   uv install -r requirements.txt
+   # Using uv (recommended):
+   uv venv .venv
+   
+   # OR using standard Python:
+   python -m venv .venv
+   ```
 
-   # OR if you prefer the standard approach:
+3. Activate the virtual environment:
+   ```bash
+   # On Mac/Linux:
+   source .venv/bin/activate
+   
+   # On Windows:
+   .venv\Scripts\activate
+   ```
+
+4. Install the required dependencies:
+   ```bash
+   # Using uv:
+   uv pip install -r requirements.txt
+   
+   # OR using standard pip:
    pip install -r requirements.txt
    ```
+
+When you see `(.venv)` at the beginning of your command prompt, it means the virtual environment is active and the dependencies will be installed there without affecting your system Python installation.
 
 ### 5. Connect Claude to Google Search Console
 
