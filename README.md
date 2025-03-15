@@ -65,7 +65,7 @@ Before using this tool, you'll need to create API credentials that allow Claude 
 
 <div align="center">
   <a href="https://www.youtube.com/watch?v=UeEuJAD0ZsU">
-    <img src="https://i.ytimg.com/vi/UeEuJAD0ZsU/maxresdefault.jpg" alt="How to Get Google Search Console API Credentials & Add a Service Account" width="600" style="margin: 20px 0; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+    <img src="https://i.ytimg.com/vi/UeEuJAD0ZsU/maxresdefault.jpg" alt="How to Get Google Search Console API Credentials & Add a Service Account" width="600" style="margin: 20px 0; border-radius: 8px;">
   </a>
 </div>
 
