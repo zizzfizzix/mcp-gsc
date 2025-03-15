@@ -64,8 +64,8 @@ Before using this tool, you'll need to create API credentials that allow Claude 
 **🎬 Watch this beginner-friendly tutorial:**
 
 <div align="center">
-  <a href="https://www.youtube.com/watch?v=UeEuJAD0ZsU">
-    <img src="https://i.ytimg.com/vi/UeEuJAD0ZsU/maxresdefault.jpg" alt="How to Get Google Search Console API Credentials & Add a Service Account" width="600" style="margin: 20px 0; border-radius: 8px;">
+  <a href="https://youtu.be/PCWsK5BgSd0">
+    <img src="https://i.ytimg.com/vi/PCWsK5BgSd0/maxresdefault.jpg" alt="Google Search Console API Setup Tutorial" width="600" style="margin: 20px 0; border-radius: 8px;">
   </a>
 </div>
 
@@ -167,7 +167,7 @@ When you see `(.venv)` at the beginning of your command prompt, it means the vir
    {
      "mcpServers": {
        "gscServer": {
-         "command": "python",
+         "command": "/FULL/PATH/TO/mcp-gsc/.venv/bin/python",
          "args": ["/FULL/PATH/TO/mcp-gsc/gsc_server.py"],
          "env": {
            "GSC_CREDENTIALS_PATH": "/FULL/PATH/TO/service_account_credentials.json"
@@ -177,18 +177,19 @@ When you see `(.venv)` at the beginning of your command prompt, it means the vir
    }
    ```
 
-   **Important:** Replace both paths with the actual locations of the files on your computer:
+   **Important:** Replace all paths with the actual locations on your computer:
    
-   - The first path should point to the `gsc_server.py` file inside the folder you unzipped
-   - The second path should point to your Google service account credentials JSON file
+   - The first path should point to the Python executable inside your virtual environment
+   - The second path should point to the `gsc_server.py` file inside the folder you unzipped
+   - The third path should point to your Google service account credentials JSON file
    
    Examples:
-   - Mac: `/Users/yourname/Documents/mcp-gsc/gsc_server.py`
-   - Windows: `C:\\Users\\yourname\\Documents\\mcp-gsc\\gsc_server.py`
-
-   **Pro Tip:** To get the full path of a file:
-   - Mac: Right-click the file, hold Option key, and select "Copy as Pathname"
-   - Windows: Shift+Right-click the file and select "Copy as path"
+   - Mac: 
+     - Python path: `/Users/yourname/Documents/mcp-gsc/.venv/bin/python`
+     - Script path: `/Users/yourname/Documents/mcp-gsc/gsc_server.py`
+   - Windows: 
+     - Python path: `C:\\Users\\yourname\\Documents\\mcp-gsc\\.venv\\Scripts\\python.exe`
+     - Script path: `C:\\Users\\yourname\\Documents\\mcp-gsc\\gsc_server.py`
 
 5. Save the file:
    - Mac: Press Ctrl+O, then Enter, then Ctrl+X to exit
