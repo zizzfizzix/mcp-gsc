@@ -61,7 +61,7 @@ Before using this tool, you'll need to create API credentials that allow Claude 
 3. Download the credentials file (a JSON file)
 4. Grant this service account access to your GSC properties
 
-**🎬 Watch this beginner-friendly tutorial:**
+**🎬 Watch this beginner-friendly tutorial on Youtube:**
 
 <div align="center">
   <a href="https://youtu.be/PCWsK5BgSd0">
@@ -69,7 +69,7 @@ Before using this tool, you'll need to create API credentials that allow Claude 
   </a>
 </div>
 
-*Click the image above to watch the step-by-step video tutorial (right-click and select "Open link in new tab" to keep this page open)*
+*Click the image above to watch the step-by-step video tutorial*
 
 ### 2. Install Required Software
 
