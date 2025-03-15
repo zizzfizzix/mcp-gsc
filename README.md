@@ -56,7 +56,7 @@ Here's what you can ask Claude to do once you've set up this integration:
 
 Before using this tool, you'll need to create API credentials that allow Claude to access your GSC data:
 
-1. Create a Google Cloud account if you don't have one
+1. Create a Google Cloud account if you don't have one and access the [Google Cloud Console](https://console.cloud.google.com/)
 2. Set up a service account (like a special user for API access)
 3. Download the credentials file (a JSON file)
 4. Grant this service account access to your GSC properties
