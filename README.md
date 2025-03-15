@@ -76,7 +76,7 @@ Before using this tool, you'll need to create API credentials that allow Claude 
 You'll need two things installed on your computer:
 
 - [Python](https://www.python.org/downloads/) (version 3.11 or newer) - This runs the connection between GSC and Claude
-- [Claude Desktop](https://claude.ai/desktop) - The AI assistant you'll chat with
+- [Claude Desktop](https://claude.ai/download) - The AI assistant you'll chat with
 
 ### 3. Download the Google Search Console MCP 
 
