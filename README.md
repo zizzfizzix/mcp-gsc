@@ -73,10 +73,13 @@ Before using this tool, you'll need to create API credentials that allow Claude 
 
 ### 2. Install Required Software
 
-You'll need two things installed on your computer:
+You'll need to install these tools on your computer:
 
 - [Python](https://www.python.org/downloads/) (version 3.11 or newer) - This runs the connection between GSC and Claude
-- [Claude Desktop](https://claude.ai/download) - The AI assistant you'll chat with
+- [Node.js](https://nodejs.org/en) - Required for running the MCP inspector and certain MCP components
+- [Claude Desktop](https://claude.ai/desktop) - The AI assistant you'll chat with
+
+Make sure both Python and Node.js are properly installed and available in your system path before proceeding.
 
 ### 3. Download the Google Search Console MCP 
 
@@ -106,13 +109,13 @@ Open your computer's Terminal (Mac) or Command Prompt (Windows):
    ```bash
    # Using uv (recommended):
    uv venv .venv
-   
+
    # OR using standard Python:
    python -m venv .venv
    ```
 
 3. Activate the virtual environment:
-   ```bash
+```bash
    # On Mac/Linux:
    source .venv/bin/activate
    
@@ -127,36 +130,20 @@ Open your computer's Terminal (Mac) or Command Prompt (Windows):
    
    # OR using standard pip:
    pip install -r requirements.txt
+   
+   # If you encounter any issues with the MCP package, install it separately:
+   pip install mcp-server>=0.1.0
    ```
 
 When you see `(.venv)` at the beginning of your command prompt, it means the virtual environment is active and the dependencies will be installed there without affecting your system Python installation.
 
-### 5. Test the GSC Server
-
-Before configuring Claude, let's make sure the server runs correctly:
-
-1. Make sure your virtual environment is still active (you should see `(.venv)` in your terminal)
-
-2. Run the server to test it:
-   ```bash
-   # Using uv:
-   uv run gsc_server.py
-   
-   # OR using standard Python:
-   python gsc_server.py
-   ```
-
-3. If the server starts without errors, press Ctrl+C to stop it
-
-If you see any error messages, make sure your Google credentials are correctly set up and all dependencies are installed.
-
-### 6. Connect Claude to Google Search Console
+### 5. Connect Claude to Google Search Console
 
 1. Download and install [Claude Desktop](https://claude.ai/download) if you haven't already
 2. Make sure you have your Google service account credentials file saved somewhere on your computer
 3. Open your computer's Terminal (Mac) or Command Prompt (Windows) and type:
 
-   ```bash
+```bash
    # For Mac users:
    nano ~/Library/Application\ Support/Claude/claude_desktop_config.json
    
@@ -200,7 +187,7 @@ If you see any error messages, make sure your Google credentials are correctly s
 6. Restart Claude Desktop
 7. When Claude opens, you should now see GSC tools available in the tools section
 
-### 7. Start Analyzing Your SEO Data!
+### 6. Start Analyzing Your SEO Data!
 
 Now you can ask Claude questions about your GSC data! Claude can not only retrieve the data but also analyze it, explain trends, and create visualizations to help you understand your SEO performance better.
 
@@ -253,12 +240,37 @@ Simply ask Claude to "visualize" or "create a chart" when analyzing your data, a
 
 ## Troubleshooting
 
+### Python Command Not Found
+
+On macOS, the default Python command is often `python3` rather than `python`, which can cause issues with some applications including Node.js integrations.
+
+If you encounter errors related to Python not being found, you can create an alias:
+
+1. Create a Python alias (one-time setup):
+   ```bash
+   # For macOS users:
+   sudo ln -s $(which python3) /usr/local/bin/python
+   
+   # If that doesn't work, try finding your Python installation:
+   sudo ln -s /Library/Frameworks/Python.framework/Versions/3.11/bin/python3 /usr/local/bin/python
+   ```
+
+2. Verify the alias works:
+   ```bash
+   python --version
+   ```
+
+This creates a symbolic link so that when applications call `python`, they'll actually use your `python3` installation.
+
+### Claude Configuration Issues
+
 If you're having trouble connecting:
 
 1. Make sure all file paths in your configuration are correct and use the full path
 2. Check that your service account has access to your GSC properties
 3. Restart Claude Desktop after making any changes
 4. Look for error messages in Claude's response when you try to use a tool
+5. Ensure your virtual environment is activated when running the server manually
 
 ---
 
