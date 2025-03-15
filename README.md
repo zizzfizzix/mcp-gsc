@@ -131,7 +131,26 @@ Open your computer's Terminal (Mac) or Command Prompt (Windows):
 
 When you see `(.venv)` at the beginning of your command prompt, it means the virtual environment is active and the dependencies will be installed there without affecting your system Python installation.
 
-### 5. Connect Claude to Google Search Console
+### 5. Test the GSC Server
+
+Before configuring Claude, let's make sure the server runs correctly:
+
+1. Make sure your virtual environment is still active (you should see `(.venv)` in your terminal)
+
+2. Run the server to test it:
+   ```bash
+   # Using uv:
+   uv run gsc_server.py
+   
+   # OR using standard Python:
+   python gsc_server.py
+   ```
+
+3. If the server starts without errors, press Ctrl+C to stop it
+
+If you see any error messages, make sure your Google credentials are correctly set up and all dependencies are installed.
+
+### 6. Connect Claude to Google Search Console
 
 1. Download and install [Claude Desktop](https://claude.ai/download) if you haven't already
 2. Make sure you have your Google service account credentials file saved somewhere on your computer
@@ -181,7 +200,7 @@ When you see `(.venv)` at the beginning of your command prompt, it means the vir
 6. Restart Claude Desktop
 7. When Claude opens, you should now see GSC tools available in the tools section
 
-### 6. Start Analyzing Your SEO Data!
+### 7. Start Analyzing Your SEO Data!
 
 Now you can ask Claude questions about your GSC data! Claude can not only retrieve the data but also analyze it, explain trends, and create visualizations to help you understand your SEO performance better.
 
