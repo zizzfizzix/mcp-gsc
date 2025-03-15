@@ -61,9 +61,13 @@ Before using this tool, you'll need to create API credentials that allow Claude 
 3. Download the credentials file (a JSON file)
 4. Grant this service account access to your GSC properties
 
-**Watch this beginner-friendly tutorial:**
+**🎬 Watch this beginner-friendly tutorial:**
 
-[![How to Get Google Search Console API Credentials & Add a Service Account](https://img.youtube.com/vi/UeEuJAD0ZsU/0.jpg)](https://www.youtube.com/watch?v=UeEuJAD0ZsU)
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=UeEuJAD0ZsU">
+    <img src="https://i.ytimg.com/vi/UeEuJAD0ZsU/maxresdefault.jpg" alt="How to Get Google Search Console API Credentials & Add a Service Account" width="600" style="margin: 20px 0; border-radius: 8px;">
+  </a>
+</div>
 
 *Click the image above to watch the step-by-step video tutorial (right-click and select "Open link in new tab" to keep this page open)*
 
@@ -162,31 +166,34 @@ Open your computer's Terminal (Mac) or Command Prompt (Windows):
 
 Now you can ask Claude questions about your GSC data! Claude can not only retrieve the data but also analyze it, explain trends, and create visualizations to help you understand your SEO performance better.
 
-Here are some example prompts you can use with each tool:
+Here are some powerful prompts you can use with each tool:
 
-| **Tool Name**                   | **Sample Prompt**                                                                                | **What You'll Learn**                                           |
-|---------------------------------|--------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| `list_properties`               | "Show me all my GSC properties."                                                                 | All websites you have access to in GSC                          |
-| `get_site_details`              | "Get details for my site example.com."                                                           | Verification status, ownership details, and site information     |
-| `get_search_analytics`          | "What are the top 10 search queries for example.com in the last 30 days?"                        | Your most valuable search terms with clicks, impressions, CTR    |
-| `get_performance_overview`      | "Give me a performance overview of example.com for the last 14 days and visualize the trends."   | Summary of site performance with visual charts                   |
-| `check_indexing_issues`         | "Check if these pages have indexing issues: example.com/page1, example.com/page2"                | Indexing status and potential problems with specific URLs        |
-| `inspect_url_enhanced`          | "Do a detailed inspection of example.com/important-page and explain any issues."                 | Comprehensive analysis of a specific URL's indexing status       |
-| `batch_url_inspection`          | "Inspect these 5 URLs and summarize any common issues: example.com/page1, example.com/page2..." | Patterns of indexing issues across multiple pages                |
-| `get_sitemaps`                  | "List all sitemaps for example.com and their status."                                            | All submitted sitemaps and their processing status               |
-| `list_sitemaps_enhanced`        | "Show me detailed information about all sitemaps for example.com."                               | In-depth sitemap analysis including errors and warnings          |
-| `submit_sitemap`                | "Submit this new sitemap: https://example.com/new-sitemap.xml"                                   | Confirmation of sitemap submission                              |
-| `get_sitemap_details`           | "What's the status of my sitemap at example.com/sitemap.xml?"                                    | Detailed processing status of a specific sitemap                 |
-| `get_search_by_page_query`      | "What queries are bringing traffic to example.com/specific-page?"                                | Search terms driving traffic to a specific page                  |
-| `compare_search_periods`        | "Compare search performance between last month and this month for example.com."                  | Period-over-period analysis with key changes highlighted         |
-| `get_advanced_search_analytics` | "Show me mobile search performance for example.com, focusing on position 1-3 queries."           | Filtered analytics based on device, position, country, etc.      |
+| **Tool Name**                   | **Sample Prompt**                                                                                |
+|---------------------------------|--------------------------------------------------------------------------------------------------|
+| `list_properties`               | "List all my GSC properties and tell me which ones have the most pages indexed."                 |
+| `get_site_details`              | "Analyze the verification status of mywebsite.com and explain what the ownership details mean."  |
+| `get_search_analytics`          | "Show me the top 20 search queries for mywebsite.com in the last 30 days, highlight any with CTR below 2%, and suggest title improvements." |
+| `get_performance_overview`      | "Create a visual performance overview of mywebsite.com for the last 28 days, identify any unusual drops or spikes, and explain possible causes." |
+| `check_indexing_issues`         | "Check these important pages for indexing issues and prioritize which ones need immediate attention: mywebsite.com/product, mywebsite.com/services, mywebsite.com/about" |
+| `inspect_url_enhanced`          | "Do a comprehensive inspection of mywebsite.com/landing-page and give me actionable recommendations to improve its indexing status." |
+| `batch_url_inspection`          | "Inspect my top 5 product pages, identify common crawling or indexing patterns, and suggest technical SEO improvements." |
+| `get_sitemaps`                  | "List all sitemaps for mywebsite.com, identify any with errors, and recommend next steps." |
+| `list_sitemaps_enhanced`        | "Analyze all my sitemaps for mywebsite.com, focusing on error patterns, and create a prioritized action plan." |
+| `submit_sitemap`                | "Submit my new product sitemap at https://mywebsite.com/product-sitemap.xml and explain how long it typically takes for Google to process it." |
+| `get_sitemap_details`           | "Check the status of my main sitemap at mywebsite.com/sitemap.xml and explain what the warnings mean for my SEO." |
+| `get_search_by_page_query`      | "What search terms are driving traffic to my blog post at mywebsite.com/blog/post-title? Identify opportunities to optimize for related keywords." |
+| `compare_search_periods`        | "Compare my site's performance between January and February. What queries improved the most, which declined, and what might explain these changes?" |
+| `get_advanced_search_analytics` | "Analyze my mobile search performance for queries with high impressions but positions below 10, and suggest content improvements to help them rank better." |
 
 You can also ask Claude to combine multiple tools and analyze the results. For example:
 
-- "Check the indexing status of my top 10 landing pages and suggest improvements."
-- "Analyze my site's performance trend over the last 90 days and identify any significant changes."
-- "Compare desktop vs. mobile search performance and visualize the differences."
-- "Find queries where I'm ranking on page 2 (positions 11-20) that have high impressions but low CTR."
+- "Find my top 20 landing pages by traffic, check their indexing status, and create a report highlighting any pages with both high traffic and indexing issues."
+
+- "Analyze my site's performance trend over the last 90 days, identify my fastest-growing queries, and check if the corresponding landing pages have any technical issues."
+
+- "Compare my desktop vs. mobile search performance, visualize the differences with charts, and recommend specific pages that need mobile optimization based on performance gaps."
+
+- "Identify queries where I'm ranking on page 2 (positions 11-20) that have high impressions but low CTR, then inspect the corresponding URLs and suggest title and meta description improvements."
 
 Claude will use the GSC tools to fetch the data, present it in an easy-to-understand format, create visualizations when helpful, and provide actionable insights based on the results.
 
