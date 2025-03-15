@@ -115,7 +115,7 @@ Open your computer's Terminal (Mac) or Command Prompt (Windows):
    ```
 
 3. Activate the virtual environment:
-```bash
+   ```bash
    # On Mac/Linux:
    source .venv/bin/activate
    
@@ -124,15 +124,25 @@ Open your computer's Terminal (Mac) or Command Prompt (Windows):
    ```
 
 4. Install the required dependencies:
-   ```bash
+```bash
    # Using uv:
    uv pip install -r requirements.txt
-   
+
    # OR using standard pip:
-   pip install -r requirements.txt
+pip install -r requirements.txt
    
    # If you encounter any issues with the MCP package, install it separately:
-   pip install mcp-server>=0.1.0
+   pip install mcp
+   ```
+
+   **If you get "pip not found" error:**
+   ```bash
+   # First ensure pip is installed and updated:
+   python3 -m ensurepip --upgrade
+   python3 -m pip install --upgrade pip
+   
+   # Then try installing the requirements again:
+   python3 -m pip install -r requirements.txt
    ```
 
 When you see `(.venv)` at the beginning of your command prompt, it means the virtual environment is active and the dependencies will be installed there without affecting your system Python installation.
