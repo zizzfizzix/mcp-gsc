@@ -77,7 +77,7 @@ You'll need to install these tools on your computer:
 
 - [Python](https://www.python.org/downloads/) (version 3.11 or newer) - This runs the connection between GSC and Claude
 - [Node.js](https://nodejs.org/en) - Required for running the MCP inspector and certain MCP components
-- [Claude Desktop](https://claude.ai/desktop) - The AI assistant you'll chat with
+- [Claude Desktop](https://claude.ai/download) - The AI assistant you'll chat with
 
 Make sure both Python and Node.js are properly installed and available in your system path before proceeding.
 
