@@ -114,7 +114,7 @@ Open your computer's Terminal (Mac) or Command Prompt (Windows):
 
 ### 5. Connect Claude to Google Search Console
 
-1. Download and install [Claude Desktop](https://claude.ai/desktop) if you haven't already
+1. Download and install [Claude Desktop](https://claude.ai/download) if you haven't already
 2. Make sure you have your Google service account credentials file saved somewhere on your computer
 3. Open your computer's Terminal (Mac) or Command Prompt (Windows) and type:
 
