@@ -143,7 +143,7 @@ async def get_search_analytics(site_url: str, days: int = 28, dimensions: str = 
             data = []
             # Add dimension values
             for dim_value in row.get("keys", []):
-                data.append(dim_value[:30])  # Truncate long values
+                data.append(dim_value[:100])  # Increased truncation limit to 100 characters
             
             # Add metrics
             data.append(str(row.get("clicks", 0)))
@@ -767,7 +767,7 @@ async def get_advanced_search_analytics(
             data = []
             # Add dimension values
             for dim_value in row.get("keys", []):
-                data.append(dim_value[:30])  # Truncate long values
+                data.append(dim_value[:100])  # Increased truncation limit to 100 characters
             
             # Add metrics
             data.append(str(row.get("clicks", 0)))
@@ -898,7 +898,7 @@ async def compare_search_periods(
         
         # Add data rows (limited to requested number)
         for item in comparison_data[:limit]:
-            key_str = " | ".join([str(k)[:20] for k in item["key"]])
+            key_str = " | ".join([str(k)[:100] for k in item["key"]])
             
             # Format the click change with color indicators
             click_change = item["click_diff"]
@@ -977,7 +977,7 @@ async def get_search_by_page_query(
             ctr = row.get("ctr", 0) * 100
             position = row.get("position", 0)
             
-            result_lines.append(f"{query[:40]} | {clicks} | {impressions} | {ctr:.2f}% | {position:.1f}")
+            result_lines.append(f"{query[:100]} | {clicks} | {impressions} | {ctr:.2f}% | {position:.1f}")
         
         # Add total metrics
         total_clicks = sum(row.get("clicks", 0) for row in response.get("rows", []))

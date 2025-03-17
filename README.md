@@ -102,17 +102,24 @@ Open your computer's Terminal (Mac) or Command Prompt (Windows):
 1. Navigate to the folder where you unzipped the files:
    ```bash
    # Example (replace with your actual path):
-   cd ~/Documents/mcp-gsc
+   cd ~/Documents/mcp-gsc-main
    ```
 
 2. Create a virtual environment (this keeps the project dependencies isolated):
    ```bash
    # Using uv (recommended):
    uv venv .venv
+   
+   # If uv is not installed, install it first:
+   pip install uv
+   # Then create the virtual environment:
+   uv venv .venv
 
    # OR using standard Python:
    python -m venv .venv
    ```
+
+   **Note:** If you get a "pip not found" error when trying to install uv, see the "If you get 'pip not found' error" section below.
 
 3. Activate the virtual environment:
    ```bash
@@ -124,12 +131,12 @@ Open your computer's Terminal (Mac) or Command Prompt (Windows):
    ```
 
 4. Install the required dependencies:
-```bash
+   ```bash
    # Using uv:
    uv pip install -r requirements.txt
 
    # OR using standard pip:
-pip install -r requirements.txt
+   pip install -r requirements.txt
    
    # If you encounter any issues with the MCP package, install it separately:
    pip install mcp
@@ -143,6 +150,9 @@ pip install -r requirements.txt
    
    # Then try installing the requirements again:
    python3 -m pip install -r requirements.txt
+   
+   # Or to install uv:
+   python3 -m pip install uv
    ```
 
 When you see `(.venv)` at the beginning of your command prompt, it means the virtual environment is active and the dependencies will be installed there without affecting your system Python installation.
@@ -167,8 +177,8 @@ When you see `(.venv)` at the beginning of your command prompt, it means the vir
    {
      "mcpServers": {
        "gscServer": {
-         "command": "/FULL/PATH/TO/mcp-gsc/.venv/bin/python",
-         "args": ["/FULL/PATH/TO/mcp-gsc/gsc_server.py"],
+         "command": "/FULL/PATH/TO/-main/.venv/bin/python",
+         "args": ["/FULL/PATH/TO/mcp-gsc-main/gsc_server.py"],
          "env": {
            "GSC_CREDENTIALS_PATH": "/FULL/PATH/TO/service_account_credentials.json"
          }
@@ -282,6 +292,20 @@ If you're having trouble connecting:
 3. Restart Claude Desktop after making any changes
 4. Look for error messages in Claude's response when you try to use a tool
 5. Ensure your virtual environment is activated when running the server manually
+
+### Other Unexpected Issues
+
+If you encounter any other unexpected issues during installation or usage:
+
+1. Copy the exact error message you're receiving
+2. Use ChatGPT or Claude and explain your problem in detail, including:
+   - What you were trying to do
+   - The exact error message
+   - Your operating system
+   - Any steps you've already tried
+3. AI assistants can often help diagnose and resolve technical issues by suggesting specific solutions for your situation
+
+Remember that most issues have been encountered by others before, and there's usually a straightforward solution available.
 
 ---
 
