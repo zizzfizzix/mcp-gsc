@@ -137,9 +137,6 @@ Open your computer's Terminal (Mac) or Command Prompt (Windows):
 
    # OR using standard pip:
    pip install -r requirements.txt
-   
-   # If you encounter any issues with the MCP package, install it separately:
-   pip install mcp
    ```
 
    **If you get "pip not found" error:**
