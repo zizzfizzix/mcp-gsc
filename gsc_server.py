@@ -26,7 +26,7 @@ POSSIBLE_CREDENTIAL_PATHS = [
     # Add any other potential paths here
 ]
 
-SCOPES = ["https://www.googleapis.com/auth/webmasters.readonly"]
+SCOPES = ["https://www.googleapis.com/auth/webmasters"]
 
 def get_gsc_service():
     """
@@ -90,6 +90,63 @@ async def list_properties() -> str:
         )
     except Exception as e:
         return f"Error retrieving properties: {str(e)}"
+
+@mcp.tool()
+async def add_site(site_url: str) -> str:
+    """
+    Add a site to your Search Console properties.
+    
+    Args:
+        site_url: The URL of the site to add (must be exact match e.g. https://example.com, or https://www.example.com, or https://subdomain.example.com/path/, for domain properties use format: sc-domain:example.com)
+    """
+    try:
+        service = get_gsc_service()
+        
+        # Add the site
+        response = service.sites().add(siteUrl=site_url).execute()
+        
+        # Format the response
+        result_lines = [f"Site {site_url} has been added to Search Console."]
+        
+        # Add permission level if available
+        if "permissionLevel" in response:
+            result_lines.append(f"Permission level: {response['permissionLevel']}")
+        
+        return "\n".join(result_lines)
+    except HttpError as e:
+        if e.resp.status == 409:
+            return f"Site {site_url} is already added to Search Console."
+        elif e.resp.status == 403:
+            return f"Error: You don't have permission to add this site. Please verify ownership first."
+        else:
+            return f"Error adding site: {str(e)}"
+    except Exception as e:
+        return f"Error adding site: {str(e)}"
+
+@mcp.tool()
+async def delete_site(site_url: str) -> str:
+    """
+    Remove a site from your Search Console properties.
+    
+    Args:
+        site_url: The URL of the site to remove (must be exact match e.g. https://example.com, or https://www.example.com, or https://subdomain.example.com/path/, for domain properties use format: sc-domain:example.com)
+    """
+    try:
+        service = get_gsc_service()
+        
+        # Delete the site
+        service.sites().delete(siteUrl=site_url).execute()
+        
+        return f"Site {site_url} has been removed from Search Console."
+    except HttpError as e:
+        if e.resp.status == 404:
+            return f"Site {site_url} was not found in Search Console."
+        elif e.resp.status == 403:
+            return f"Error: You don't have permission to remove this site."
+        else:
+            return f"Error removing site: {str(e)}"
+    except Exception as e:
+        return f"Error removing site: {str(e)}"
 
 @mcp.tool()
 async def get_search_analytics(site_url: str, days: int = 28, dimensions: str = "query") -> str:
