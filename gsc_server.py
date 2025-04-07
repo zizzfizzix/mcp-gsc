@@ -181,12 +181,36 @@ async def add_site(site_url: str) -> str:
         
         return "\n".join(result_lines)
     except HttpError as e:
-        if e.resp.status == 409:
+        error_content = json.loads(e.content.decode('utf-8'))
+        error_details = error_content.get('error', {})
+        error_code = e.resp.status
+        error_message = error_details.get('message', str(e))
+        error_reason = error_details.get('errors', [{}])[0].get('reason', '')
+        
+        if error_code == 409:
             return f"Site {site_url} is already added to Search Console."
-        elif e.resp.status == 403:
-            return f"Error: You don't have permission to add this site. Please verify ownership first."
+        elif error_code == 403:
+            if error_reason == 'forbidden':
+                return f"Error: You don't have permission to add this site. Please verify ownership first."
+            elif error_reason == 'quotaExceeded':
+                return f"Error: API quota exceeded. Please try again later."
+            else:
+                return f"Error: Permission denied. {error_message}"
+        elif error_code == 400:
+            if error_reason == 'invalidParameter':
+                return f"Error: Invalid site URL format. Please check the URL format and try again."
+            else:
+                return f"Error: Bad request. {error_message}"
+        elif error_code == 401:
+            return f"Error: Unauthorized. Please check your credentials."
+        elif error_code == 429:
+            return f"Error: Too many requests. Please try again later."
+        elif error_code == 500:
+            return f"Error: Internal server error from Google Search Console API. Please try again later."
+        elif error_code == 503:
+            return f"Error: Service unavailable. Google Search Console API is currently down. Please try again later."
         else:
-            return f"Error adding site: {str(e)}"
+            return f"Error adding site (HTTP {error_code}): {error_message}"
     except Exception as e:
         return f"Error adding site: {str(e)}"
 
@@ -206,12 +230,36 @@ async def delete_site(site_url: str) -> str:
         
         return f"Site {site_url} has been removed from Search Console."
     except HttpError as e:
-        if e.resp.status == 404:
+        error_content = json.loads(e.content.decode('utf-8'))
+        error_details = error_content.get('error', {})
+        error_code = e.resp.status
+        error_message = error_details.get('message', str(e))
+        error_reason = error_details.get('errors', [{}])[0].get('reason', '')
+        
+        if error_code == 404:
             return f"Site {site_url} was not found in Search Console."
-        elif e.resp.status == 403:
-            return f"Error: You don't have permission to remove this site."
+        elif error_code == 403:
+            if error_reason == 'forbidden':
+                return f"Error: You don't have permission to remove this site."
+            elif error_reason == 'quotaExceeded':
+                return f"Error: API quota exceeded. Please try again later."
+            else:
+                return f"Error: Permission denied. {error_message}"
+        elif error_code == 400:
+            if error_reason == 'invalidParameter':
+                return f"Error: Invalid site URL format. Please check the URL format and try again."
+            else:
+                return f"Error: Bad request. {error_message}"
+        elif error_code == 401:
+            return f"Error: Unauthorized. Please check your credentials."
+        elif error_code == 429:
+            return f"Error: Too many requests. Please try again later."
+        elif error_code == 500:
+            return f"Error: Internal server error from Google Search Console API. Please try again later."
+        elif error_code == 503:
+            return f"Error: Service unavailable. Google Search Console API is currently down. Please try again later."
         else:
-            return f"Error removing site: {str(e)}"
+            return f"Error removing site (HTTP {error_code}): {error_message}"
     except Exception as e:
         return f"Error removing site: {str(e)}"
 
