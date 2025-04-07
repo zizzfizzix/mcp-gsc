@@ -9,6 +9,8 @@ A tool that connects [Google Search Console](https://search.google.com/search-co
 1. **Property Management**  
    - See all your GSC properties in one place
    - Get verification details and basic site information
+   - Add new properties to your account
+   - Remove properties from your account
 
 2. **Search Analytics & Reporting**  
    - Discover which search queries bring visitors to your site
@@ -39,6 +41,8 @@ Here's what you can ask Claude to do once you've set up this integration:
 |---------------------------------|-------------------------------------------------------------|----------------------------------------------------------------|
 | `list_properties`               | Shows all your GSC properties                               | Nothing - just ask!                                             |
 | `get_site_details`              | Shows details about a specific site                         | Your website URL                                                |
+| `add_site`                      | Adds a new site to your GSC properties                      | Your website URL                                                |
+| `delete_site`                   | Removes a site from your GSC properties                     | Your website URL                                                |
 | `get_search_analytics`          | Shows top queries and pages with metrics                    | Your website URL and time period                                |
 | `get_performance_overview`      | Gives a summary of site performance                         | Your website URL and time period                                |
 | `check_indexing_issues`         | Checks if pages have indexing problems                      | Your website URL and list of pages to check                     |
@@ -46,7 +50,7 @@ Here's what you can ask Claude to do once you've set up this integration:
 | `get_sitemaps`                  | Lists all sitemaps for your site                            | Your website URL                                                |
 | `submit_sitemap`                | Submits a new sitemap to Google                             | Your website URL and sitemap URL                                |
 
-*For a complete list of all 17 available tools and their detailed descriptions, ask Claude to "list tools" after setup.*
+*For a complete list of all 19 available tools and their detailed descriptions, ask Claude to "list tools" after setup.*
 
 ---
 
@@ -218,6 +222,8 @@ Here are some powerful prompts you can use with each tool:
 |---------------------------------|--------------------------------------------------------------------------------------------------|
 | `list_properties`               | "List all my GSC properties and tell me which ones have the most pages indexed."                 |
 | `get_site_details`              | "Analyze the verification status of mywebsite.com and explain what the ownership details mean."  |
+| `add_site`                      | "Add my new website https://mywebsite.com to Search Console and verify its status."              |
+| `delete_site`                   | "Remove the old test site https://test.mywebsite.com from Search Console."                       |
 | `get_search_analytics`          | "Show me the top 20 search queries for mywebsite.com in the last 30 days, highlight any with CTR below 2%, and suggest title improvements." |
 | `get_performance_overview`      | "Create a visual performance overview of mywebsite.com for the last 28 days, identify any unusual drops or spikes, and explain possible causes." |
 | `check_indexing_issues`         | "Check these important pages for indexing issues and prioritize which ones need immediate attention: mywebsite.com/product, mywebsite.com/services, mywebsite.com/about" |
