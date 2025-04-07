@@ -56,10 +56,49 @@ Here's what you can ask Claude to do once you've set up this integration:
 
 Before using this tool, you'll need to create API credentials that allow Claude to access your GSC data:
 
-1. Create a Google Cloud account if you don't have one and access the [Google Cloud Console](https://console.cloud.google.com/)
-2. Set up a service account (like a special user for API access)
-3. Download the credentials file (a JSON file)
-4. Grant this service account access to your GSC properties
+#### Authentication Options
+
+The tool supports two authentication methods:
+
+##### 1. OAuth Authentication (Recommended)
+
+This method allows you to authenticate with your own Google account, which is often more convenient than using a service account. It will have access to the same resources you normally do.
+
+Set `GSC_SKIP_OAUTH` to "true", "1", or "yes" to skip OAuth authentication and use only service account authentication
+
+###### Setup Instructions:
+
+1. Go to the [Google Cloud Console](https://console.cloud.google.com/) and create a Google Cloud account if you don't have one
+2. Create a new project or select an existing one
+3. [Enable the Search Console API](https://console.cloud.google.com/apis/library/searchconsole.googleapis.com) for your project
+4. [Add scope](https://console.cloud.google.com/auth/scopes) `https://www.googleapis.com/auth/webmasters` to your project
+5. Go to the ["Credentials" page](https://console.cloud.google.com/apis/credentials)
+6. Click "Create Credentials" and select "OAuth client ID"
+7. Configure the OAuth consent screen
+8. For application type, select "Desktop app"
+9. Give your OAuth client a name and click "Create"
+10. Download the client secrets JSON file (it will be named something like `client_secrets.json`)
+11. Place this file in the same directory as the script or set the `GSC_OAUTH_CLIENT_SECRETS_FILE` environment variable to point to its location
+
+When you run the tool for the first time with OAuth authentication, it will open a browser window asking you to sign in to your Google account and authorize the application. After authorization, the tool will save the token for future use.
+
+##### 2. Service Account Authentication
+
+This method uses a service account, which is useful for automated scripts or when you don't want to use your personal Google account. This requires adding the service account as a user in Google Search Console.
+
+###### Setup Instructions:
+
+1. Go to the [Google Cloud Console](https://console.cloud.google.com/) and create a Google Cloud account if you don't have one
+2. Create a new project or select an existing one
+3. [Enable the Search Console API](https://console.cloud.google.com/apis/library/searchconsole.googleapis.com) for your project
+4. Go to the ["Credentials" page](https://console.cloud.google.com/apis/credentials)
+5. Click "Create Credentials" and select "Service Account"
+6. Fill in the service account details and click "Create"
+7. Click on the newly created service account
+8. Go to the "Keys" tab and click "Add Key" > "Create new key"
+9. Select JSON format and click "Create"
+10. Download the key file and save it as `service_account_credentials.json` in the same directory as the script or set the `GSC_CREDENTIALS_PATH` environment variable to point to its location
+11. Add your service account email address to appropriate Search Console properties
 
 **🎬 Watch this beginner-friendly tutorial on Youtube:**
 
@@ -168,7 +207,9 @@ When you see `(.venv)` at the beginning of your command prompt, it means the vir
    notepad %APPDATA%\Claude\claude_desktop_config.json
    ```
 
-4. Add the following text (this tells Claude how to connect to GSC):
+4. Add the following configuration text (this tells Claude how to connect to GSC):
+
+#### OAuth authentication (using your own account)
 
    ```json
    {
@@ -177,7 +218,24 @@ When you see `(.venv)` at the beginning of your command prompt, it means the vir
          "command": "/FULL/PATH/TO/-main/.venv/bin/python",
          "args": ["/FULL/PATH/TO/mcp-gsc-main/gsc_server.py"],
          "env": {
-           "GSC_CREDENTIALS_PATH": "/FULL/PATH/TO/service_account_credentials.json"
+           "GSC_OAUTH_CLIENT_SECRETS_FILE": "/FULL/PATH/TO/client_secrets.json"
+         }
+       }
+     }
+   }
+   ```
+
+#### Service account authentication
+
+   ```json
+   {
+     "mcpServers": {
+       "gscServer": {
+         "command": "/FULL/PATH/TO/-main/.venv/bin/python",
+         "args": ["/FULL/PATH/TO/mcp-gsc-main/gsc_server.py"],
+         "env": {
+           "GSC_CREDENTIALS_PATH": "/FULL/PATH/TO/service_account_credentials.json",
+           "GSC_SKIP_OAUTH": "true"
          }
        }
      }
