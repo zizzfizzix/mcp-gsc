@@ -6,6 +6,8 @@ from datetime import datetime, timedelta
 import google.auth
 from google.auth.transport.requests import Request
 from google.oauth2 import service_account
+from google.oauth2.credentials import Credentials
+from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
@@ -26,13 +28,33 @@ POSSIBLE_CREDENTIAL_PATHS = [
     # Add any other potential paths here
 ]
 
+# OAuth client secrets file path
+OAUTH_CLIENT_SECRETS_FILE = os.environ.get("GSC_OAUTH_CLIENT_SECRETS_FILE")
+if not OAUTH_CLIENT_SECRETS_FILE:
+    OAUTH_CLIENT_SECRETS_FILE = os.path.join(SCRIPT_DIR, "client_secrets.json")
+
+# Token file path for storing OAuth tokens
+TOKEN_FILE = os.path.join(SCRIPT_DIR, "token.json")
+
+# Environment variable to skip OAuth authentication
+SKIP_OAUTH = os.environ.get("GSC_SKIP_OAUTH", "").lower() in ("true", "1", "yes")
+
 SCOPES = ["https://www.googleapis.com/auth/webmasters"]
 
 def get_gsc_service():
     """
     Returns an authorized Search Console service object.
-    Checks for credentials in environment variable first, then fallback locations.
+    First tries OAuth authentication, then falls back to service account.
     """
+    # Try OAuth authentication first if not skipped
+    if not SKIP_OAUTH:
+        try:
+            return get_gsc_service_oauth()
+        except Exception as e:
+            # If OAuth fails, try service account
+            pass
+    
+    # Try service account authentication
     for cred_path in POSSIBLE_CREDENTIAL_PATHS:
         if cred_path and os.path.exists(cred_path):
             try:
@@ -43,12 +65,46 @@ def get_gsc_service():
             except Exception as e:
                 continue  # Try the next path if this one fails
     
-    # If we get here, none of the paths worked
+    # If we get here, none of the authentication methods worked
     raise FileNotFoundError(
-        f"Credentials file not found. Please set the GSC_CREDENTIALS_PATH environment variable "
-        f"or place credentials file in one of these locations: "
+        f"Authentication failed. Please either:\n"
+        f"1. Set up OAuth by placing a client_secrets.json file in the script directory, or\n"
+        f"2. Set the GSC_CREDENTIALS_PATH environment variable or place a service account credentials file in one of these locations: "
         f"{', '.join([p for p in POSSIBLE_CREDENTIAL_PATHS[1:] if p])}"
     )
+
+def get_gsc_service_oauth():
+    """
+    Returns an authorized Search Console service object using OAuth.
+    """
+    creds = None
+    
+    # Check if token file exists
+    if os.path.exists(TOKEN_FILE):
+        creds = Credentials.from_authorized_user_file(TOKEN_FILE, SCOPES)
+    
+    # If credentials don't exist or are invalid, get new ones
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            # Check if client secrets file exists
+            if not os.path.exists(OAUTH_CLIENT_SECRETS_FILE):
+                raise FileNotFoundError(
+                    f"OAuth client secrets file not found. Please place a client_secrets.json file in the script directory "
+                    f"or set the GSC_OAUTH_CLIENT_SECRETS_FILE environment variable."
+                )
+            
+            # Start OAuth flow
+            flow = InstalledAppFlow.from_client_secrets_file(OAUTH_CLIENT_SECRETS_FILE, SCOPES)
+            creds = flow.run_local_server(port=0)
+            
+            # Save the credentials for future use
+            with open(TOKEN_FILE, 'w') as token:
+                token.write(creds.to_json())
+    
+    # Build and return the service
+    return build("searchconsole", "v1", credentials=creds)
 
 @mcp.tool()
 async def list_properties() -> str:
