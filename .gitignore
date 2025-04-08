@@ -19,6 +19,7 @@ env/
 service_account_credentials.json
 credentials.json
 token.json
+client_secret*.json
 
 # Editor-specific files
 .vscode/
